@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+	<link href="~/styles/bootstrap.min.css" rel="stylesheet" />
+	<script src="~/scripts/bootstrap.min.js" defer></script>
+    <link rel="stylesheet" href="~/styles/style.css">
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <header class="header">
+        <div class="container my-4">
+            <div class="left">
+                <h2 class="header_title">Test</h2>
+            </div>
+            <nav class="right">
+                <button class="nav_btn">Home</button>
+                <button class="nav_btn">Something</button>
+                <button class="nav_btn">Cart</button>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="container my-4">
+            @RenderBody()
+        </div>
+    </main>
+    <footer class="bg-dark text-white">
+        <div class="container text-center">
+            Footer Content
+        </div>
+    </footer>
+</body>
+</html>
+
+
+

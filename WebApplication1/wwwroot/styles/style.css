@@ -1,0 +1,98 @@
+﻿.body {
+  background-color: whitesmoke;
+}
+
+.header {
+  background-color: mediumpurple !important;
+  color: white;
+  padding: 0px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.left {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.header_title {
+  text-decoration: underline;
+}
+
+.right {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 300px;
+  height: 100px;
+}
+
+.nav_btn {
+  background-color: cadetblue; /* Green background */
+  border: none; /* Remove borders */
+  color: white; /* White text */
+  padding: 12px 22px; /* Some padding */
+  text-align: center; /* Center text */
+  text-decoration: none; /* Remove underline */
+  display: inline-block; /* Make it a block element to fill the width */
+  font-size: 14px; /* Increase font size */
+  margin: 4px 2px; /* Add some margin */
+  transition-duration: 0.4s; /* Add transition for smooth hover effect */
+  cursor: pointer; /* Add a pointer cursor on hover */
+  border-radius: 4px;
+}
+
+.nav_btn:hover {
+  background-color: whitesmoke; /* White background on hover */
+  color: black; /* Black text on hover */
+}
+
+.info_btn {
+  background-color: cadetblue;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 13px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.info_btn:hover {
+  background-color: whitesmoke;
+  color: black;
+}
+
+.cart_btn {
+  background-color: mediumpurple;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 13px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.cart_btn:hover {
+  background-color: cornflowerblue;
+  color: black;
+}
