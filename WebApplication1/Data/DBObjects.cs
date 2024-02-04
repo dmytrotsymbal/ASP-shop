@@ -12,17 +12,21 @@ namespace WebApplication1.Data
 	{
 		public static void Initial(AppDBContent content)
 		{				
-			if (!content.Categories.Any())
+			if (!content.Categories.Any()) // если нет категорий - будем добавлять категории
 			{
-				content.Categories.AddRange(Categories.Select(c => c.Value));
+				content.Categories.AddRange(Categories.Select(c => c.Value)); // - вызываем функцию Categories которая внизу
 			}
 
-			if (!content.Cars.Any())
+			if (!content.Cars.Any()) // если нет машин - будем добавлять машины
 			{
+				// добавляем машины, берем из мок карс
+				// поменяем категории машин
+
+				// и айдишники машины не заполняем
 				content.AddRange(
 					 new Car
 					 {
-						 id = 1,
+						 //id = 1,
 						 name = "Tesla Pl",
 						 shortDesc = "Быстрый и стильный",
 						 longDesc = "Красивый и удобный",
@@ -39,7 +43,7 @@ namespace WebApplication1.Data
 					 },
 					new Car
 					{
-						id = 2,
+						//id = 2,
 						name = "Toyota",
 						shortDesc = "Надежный и экономичный",
 						longDesc = "Просторный и комфортный",
@@ -47,11 +51,11 @@ namespace WebApplication1.Data
 						price = 25000,
 						isFavourite = true,
 						available = true,
-						Category = Categories["Классические автомобили"]
+						Category = Categories["Классические"]
 					},
 					new Car
 					{
-						id = 3,
+						//id = 3,
 						name = "Ford Pickup",
 						shortDesc = "Мощный и вместительный",
 						longDesc = "Идеальный для работы",
@@ -63,7 +67,7 @@ namespace WebApplication1.Data
 					},
 					new Car
 					{
-						id = 4,
+						//id = 4,
 						name = "Volvo Truck",
 						shortDesc = "Надежный грузовик",
 						longDesc = "С большой грузоподъемностью",
@@ -75,7 +79,7 @@ namespace WebApplication1.Data
 					},
 					new Car
 					{
-						id = 5,
+						//id = 5,
 						name = "Nissan Leaf",
 						shortDesc = "Экологичный и экономичный",
 						longDesc = "Идеальный для города",
@@ -87,7 +91,7 @@ namespace WebApplication1.Data
 					},
 					new Car
 					{
-						id = 6,
+						//id = 6,
 						name = "Mercedes S-class",
 						shortDesc = "Дорогой и стильный",
 						longDesc = "Дамочки от такого в шоке",
@@ -95,21 +99,28 @@ namespace WebApplication1.Data
 						price = 30000,
 						isFavourite = true,
 						available = true,
-						Category = Categories["Классические автомобили"]
+						Category = Categories["Классические"]
 					}
 				);
 			}
 
-			content.SaveChanges();
+			content.SaveChanges(); // очень важная строка для сохранения изменений в базе данных
 		}
 
+		//=======================================================================================
+
+		// переменная для проверки на существование
 		private static Dictionary<string, Category> category;
+
+		// функция которая будет возвращать список категорий 
 		public static Dictionary<string, Category> Categories
 		{
 			get
 			{
+				// проверка, если переменная пуста - добавляем новые объекты
 				if (category == null)
 				{
+					// создаем список через var
 					var list = new Category[]
 					{
 						 new Category { name = "Электромобили", description = "Електрические автомобили без двигателя внутреннего сгорания"},
@@ -118,6 +129,7 @@ namespace WebApplication1.Data
 						 new Category { name = "Грузовики", description = "Автомобили с грузовыми помещениями" }
 					};
 
+					// выделяем память и внутрь переменной category добавляем новые объекты через цикл
 					category = new Dictionary<string, Category>();
 					foreach (var el in list)
 					{
@@ -125,6 +137,7 @@ namespace WebApplication1.Data
 					}
 				}
 
+				// возвращем заполненную переменную category, уже с категориями
 				return category;
 			}
 		}  

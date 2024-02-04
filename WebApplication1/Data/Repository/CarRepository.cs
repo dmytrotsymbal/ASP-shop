@@ -10,15 +10,17 @@ namespace WebApplication1.Data.Repository
 	public class CarRepository : IAllCars // - наследуют все из своих инетерфейсов.
 										  // Раньше интерфейсы реализововались в Моксах, а теперь тут
 	{
-		private readonly AppDBContent appDBContent; // - новая переменная для работы с файликом
+		private readonly AppDBContent appDBContent; // - новая переменная для работы с файликом dbsettings.json
 
-		public CarRepository(AppDBContent appDBContent) // - конструктор для установки значения в переменную
+		public CarRepository(AppDBContent appDBContent) // - конструктор для установки значения в переменную appDBContent
 		{
 			this.appDBContent = appDBContent;
 		}
 
-		// функции для получения данных, получают данные из файлика
-		// обращаемся к обекту appDBContent, дальше к функции Cars и через Include берем переменную с записываем все данные которые подходят по Category
+		// функции для получения данных, получают данные из файлика dbsettings.json
+
+		// обращаемся к обекту appDBContent, дальше к функции Cars и через Include берем переменную с
+		// записываем все данные которые подходят по Category
 		public IEnumerable<Car> Cars => appDBContent.Cars.Include(c => c.Category);
 
 		// то же самое только добавляем условие на isFavourite, реализуем его через метод Where 
