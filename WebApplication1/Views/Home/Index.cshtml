@@ -1,7 +1,4 @@
-﻿
-
-
-@model HomeViewModel
+﻿@model HomeViewModel
 
 <div>
 	<h1>Favorites</h1>
@@ -10,7 +7,9 @@
 		<div class="row">
 			@foreach (Car car in Model.favCars)
 			{
-				@Html.Partial("AllCars", car)
+				<div class="col-md-3" style="margin-bottom: 20px;">
+					@Html.Partial("AllCars", car)
+				</div>
 			}
 		</div>
 	</div>

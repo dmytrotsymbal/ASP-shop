@@ -54,6 +54,7 @@ namespace WebApplication1
             services.AddMvc();
 			services.AddMvc(options => options.EnableEndpointRouting = false);
 
+
             // сервис для использование кеша
             services.AddMemoryCache();
 
@@ -77,7 +78,23 @@ namespace WebApplication1
             app.UseSession();
 
 			// use MVC
-			app.UseMvcWithDefaultRoute();
+			// app.UseMvcWithDefaultRoute();
+
+            app.UseMvc(routes =>
+            {
+				// routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
+				// routes.MapRoute(name: "categoryFilter", template: "{controller=Car}/{action}/{category?}", defaults: new {Controller="Car", action="List"});
+
+				routes.MapRoute(
+		name: "default",
+		template: "{controller=Home}/{action=Index}/{id?}"
+	);
+
+				routes.MapRoute(
+					name: "categoryFilter",
+					template: "Car/{action=List}/{category?}"
+				);
+			});
 
 
 			// подключаем весь контент 

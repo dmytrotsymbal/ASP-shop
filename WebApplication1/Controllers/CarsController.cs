@@ -1,4 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using WebApplication1.Data.Interfaces;
 using WebApplication1.Data.Models;
 using WebApplication1.ViewModels;
@@ -26,31 +30,69 @@ namespace WebApplication1.Controllers
             _allCategories = IAllCategories; // - устанавливаем наши параметры в эти переменные 
         }
 
-        // метод который будет возвращать ViewResult - полноценную ШТМЛ страничку
-        // public ViewResult List() // - !!!!!!!!!!! название функции которую мы вызываем в контроллере и которая фигурирует в ЮРЛ !!!!!!!!!!!
+		// метод который будет возвращать ViewResult - полноценную ШТМЛ страничку
+		// public ViewResult List() // - !!!!!!!!!!! название функции которую мы вызываем в контроллере и которая фигурирует в ЮРЛ !!!!!!!!!!!
 		// {
-			
-			// ЕСТЬ второй способ передачи данных в ШТМЛ - ViewBag
-			// ViewBag.Название_переменной = "Значение переменной";
-			// ViewBag.Category = "Some new";
-			// =================================================================================
-			// var cars = _allCars.Cars; // - получаем все автомобили в перемунную cars с типом данных VAR
-            // return View(cars);
 
-			// теперь когда мы будем вызывать эту функцию мы
-			// получим полноценную ШТМЛ страничку с товарами
+		// ЕСТЬ второй способ передачи данных в ШТМЛ - ViewBag
+		// ViewBag.Название_переменной = "Значение переменной";
+		// ViewBag.Category = "Some new";
+		// =================================================================================
+		// var cars = _allCars.Cars; // - получаем все автомобили в перемунную cars с типом данных VAR
+		// return View(cars);
 
-			// var cars = _allCars.Cars - обращение к конкретному интерфейсу и
-			// через переменную обращаемся к функции Cars -   IEnumerable<Car> Cars { get; }
+		// теперь когда мы будем вызывать эту функцию мы
+		// получим полноценную ШТМЛ страничку с товарами
+
+		// var cars = _allCars.Cars - обращение к конкретному интерфейсу и
+		// через переменную обращаемся к функции Cars -   IEnumerable<Car> Cars { get; }
 		// }
 
-        public ViewResult List()
+		[Route("Cars/List")]
+		[Route("Cars/List/{category}")]
+		public ViewResult List(string category) // параметр для работы с категориями
         {
+			string _category = category; // - присваиваем переменной значение
+			IEnumerable<Car> cars = null; // - список автомобилей которые нужно отобразить
+			string currCategory = ""; // - текущая категория
+
+			if (string.IsNullOrEmpty(category)) // - если категория пустая
+			{
+				cars = _allCars.Cars.OrderBy(i => i.id); // - отсортируем автомобили по id - выведем все автомобили
+														 // просто в порядке айдишек
+			}
+			else
+			{
+				if (string.Equals("electro", category, StringComparison.OrdinalIgnoreCase)) // - если строка(категория) = electro
+				{
+					cars = _allCars.Cars.Where(i => i.Category.name.Equals("Электромобили")).OrderBy(i => i.id);
+					// выводим все автомобили у которых name категории = электромобили и отсортируем по айдишках
+				} 
+				else if (string.Equals("fuel", category, StringComparison.OrdinalIgnoreCase))
+				{
+					cars = _allCars.Cars.Where(i => i.Category.name.Equals("Классические")).OrderBy(i => i.id);
+					// выводим все автомобили у которых name категории = Классические и отсортируем по айдишках
+				} 
+				else if (string.Equals("pickups", category, StringComparison.OrdinalIgnoreCase))
+				{
+					cars = _allCars.Cars.Where(i => i.Category.name.Equals("Пикапы")).OrderBy(i => i.id);
+				}
+				else 
+				{
+					cars = _allCars.Cars.Where(i => i.Category.name.Equals("Грузовики")).OrderBy(i => i.id);
+				}
+
+				currCategory = _category;
+			}
+
+			var carObj = new CarsListViewModel // - создаем новый объект на основе класса CarsListViewModel
+			{
+				allCars = cars,
+				currCategory = currCategory
+			};
 			ViewBag.Title = "AUTOmibiles";
-			CarsListViewModel obj = new CarsListViewModel(); // - создаем новый объект на основе класса CarsListViewModel
-			obj.allCars = _allCars.Cars; // - поместим в него все данные 
-            obj.currCategory = "Все автомобили"; // - поместим в него данные
-			return View(obj);
+
+			return View(carObj);
 		}
 	}
 }

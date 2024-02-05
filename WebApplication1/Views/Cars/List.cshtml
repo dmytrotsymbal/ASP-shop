@@ -3,11 +3,20 @@
 <div>
 	<h1>Whole list of cars</h1>
 
+	<div>
+		<a href="/Cars/List/electro">Электромобили</a>
+		<a href="/Cars/List/fuel">Все автомобили</a>
+		<a href="/Cars/List/pickups">Двигатели</a>
+		<a href="/Cars/List/trucks">Комби</a>
+	</div>
+
 	<div class="container">
 		<div class="row">
 			@foreach (Car car in Model.allCars)
 			{
-				@Html.Partial("AllCars", car)
+				<div class="col-md-3" style="margin-bottom: 20px;">
+					@Html.Partial("AllCars", car)
+				</div>
 			}
 		</div>
 	</div>
