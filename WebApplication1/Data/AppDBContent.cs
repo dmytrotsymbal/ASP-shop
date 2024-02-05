@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore; // !!!
 using WebApplication1.Data.Models;
 
+// внутри этого файла мы регестрируем какие таблички у нас будут в самой базе данных
 namespace WebApplication1.Data
 {
 	public class AppDBContent : DbContext // всегда наследует DbContext
@@ -16,5 +17,9 @@ namespace WebApplication1.Data
 
 		// 2) - функция получения и установки всех категорий
 		public DbSet<Category> Categories { get; set; }
+
+
+		// 3) - функция получения и установки всех покупок, корзины
+		public DbSet<ShopCartItem> ShopCartItem { get; set; }
 	}
 }
