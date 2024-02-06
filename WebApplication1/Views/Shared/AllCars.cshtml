@@ -8,8 +8,7 @@
 			<p class="card-text">@Model.shortDesc</p>
 			<h6 class="card-subtitle mb-2 text-muted">@Model.price.ToString("c")</h6>
 			<div class="button-group">
-				<button class="info_btn">More Info</button>
-				<button class="cart_btn">Add to Cart</button>
+			<a class="btn btn-primary" asp-controller="ShopCart" asp-action="addToCart" asp-route-id="@Model.id">Add to Cart</a>
 			</div>
 		</div>
 	</div>

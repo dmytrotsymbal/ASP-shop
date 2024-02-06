@@ -44,9 +44,10 @@ namespace WebApplication1
             // меняем с моков на наши репозитории
             services.AddTransient<IAllCars, CarRepository>();
             services.AddTransient<ICarsCategory, CategoryRepository>();
+            services.AddTransient <IAllOrders, OrdersRepository>();
 
-            // сервис который позволит нам работать с сервисами
-            services.AddSingleton<IHttpContextAccessor,  HttpContextAccessor>();
+			// сервис который позволит нам работать с сервисами
+			services.AddSingleton<IHttpContextAccessor,  HttpContextAccessor>();
 
             // сервис позволит сделать две разные карзины для двух разных юзеров
             services.AddScoped(sp => ShopCart.GetCart(sp));
@@ -86,8 +87,8 @@ namespace WebApplication1
 				// routes.MapRoute(name: "categoryFilter", template: "{controller=Car}/{action}/{category?}", defaults: new {Controller="Car", action="List"});
 
 				routes.MapRoute(
-		name: "default",
-		template: "{controller=Home}/{action=Index}/{id?}"
+		            name: "default",
+		            template: "{controller=Home}/{action=Index}/{id?}"
 	);
 
 				routes.MapRoute(

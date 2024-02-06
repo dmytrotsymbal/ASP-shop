@@ -21,5 +21,10 @@ namespace WebApplication1.Data
 
 		// 3) - функция получения и установки всех покупок, корзины
 		public DbSet<ShopCartItem> ShopCartItem { get; set; }
+
+
+		// 4) - функция получения и установки всех заказов
+		public DbSet<Order> Order { get; set; }
+		public DbSet<OrderDetail> OrderDetail { get; set; }
 	}
 }
